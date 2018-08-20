@@ -1,0 +1,86 @@
+.x-small-icon{
+  height: 20px;
+  padding:3px;
+  img{
+    margin-top: -15px;
+  }
+  & .bg-color{
+    border: 1px solid white;
+  }
+}
+.small-icon{
+  height: 30px;
+  padding:5px;
+  img{
+    margin-top: -8px;
+  }
+}
+
+.medium-icon{
+  height: 50px;
+  padding:5px;
+}
+
+.skill-icon{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2px;
+  & .bg-color{
+    content:' ';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:0px;
+    left:0px;
+    border-radius: 50%;
+  }
+
+  & img{
+    height:100%;
+    position:relative;
+  }
+}
+
+.iconized-photo{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  padding:0px!important;
+  img{
+    margin:0px;
+  }
+}
+
+.php-bg{
+  background: $php;
+}
+
+.ruby-bg{
+  background: $ruby;
+}
+
+.swift-bg{
+  background: $swift;
+}
+
+.go-bg{
+  background: $go;
+}
+
+.csharp-bg{
+  background: $csharp;
+}
+
+.javascript-bg{
+  background: $javascript;
+}
+
+.python-bg{
+  background: $python;
+}
+
+.typescript{
+  background: $typescript;
+}
+

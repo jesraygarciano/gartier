@@ -1,0 +1,105 @@
+.overflow-hidden{
+  overflow: hidden
+}
+
+.absolute-center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.n{
+  font-weight: 500;
+  color: inherit;
+}
+
+.simple-list{
+  list-style: none;
+  padding: 0px;
+}
+
+.simple-list li{
+  border-bottom:1px solid #f0f0f0;
+  padding: 5px 0;
+  position: relative;
+}
+
+.simple-list li .options{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.simple-list li .options .option
+{
+  opacity: 0;
+  transition: 200ms ease all;
+  transform: translateY(50%);
+  cursor: pointer;
+}
+
+.simple-list li:hover .options .option{
+  opacity: 1;
+  transform: initial;
+}
+
+.dominant-label{
+  position:relative;
+}
+
+.dominant-label .label{
+  display: table-cell;
+  width: 0px;
+  white-space: nowrap;
+}
+
+.dominant-label .submissive{
+  display: table-cell;
+  position:relative;
+  width:100%;
+}
+
+.dominant-label .submissive .text{
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  padding-left: 5px;
+}
+
+.text-ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.m-tb-10{
+  margin:10px 0;
+}
+
+.border-bottom{
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dvder{
+  display: inline-block;
+  background: #f1f1f1;
+  width: 1px;
+}
+
+.p-15{
+  padding: 15px;
+}
+
+.p-10{
+  padding: 10px;
+}
+
+.p-r-50{
+  padding-right: 50px;
+}
+
+.recent{
+  background: #fff7e9;
+}

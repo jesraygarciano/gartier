@@ -1,0 +1,58 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import url('~quill/dist/quill.core.css');
+@import url('~quill/dist/quill.snow.css');
+@import url('~quill/dist/quill.bubble.css');
+@import '~sweetalert2/src/sweetalert2';
+
+@import '~@coreui/coreui/scss/coreui';
+
+@import 'elements/card';
+@import 'elements/profile-view';
+@import 'elements/navbar';
+@import 'elements/buttons';
+@import 'elements/transitions';
+@import 'elements/input';
+@import 'elements/icons';
+@import 'elements/info-preview';
+@import 'elements/hiring-progress-table';
+@import 'elements/photo-viewer';
+@import 'elements/opening-card';
+@import 'elements/table';
+@import 'elements/wizard';
+@import 'elements/icon-button';
+@import 'elements/side-popup';
+@import 'elements/company-card';
+@import 'elements/about_timeline';
+
+@import 'elements/section_hero';
+
+@import 'elements/footer';
+
+.has-border-right-md{
+    border-right:1px solid #cecece;
+}
+.has-border-right-sm{
+    border-right:1px solid #cecece;
+}
+
+.show-md{
+    display: none!important;
+}
+@media(max-width: 767.98px){
+    .show-md{
+        display: initial!important;
+    }
+    .hidden-md{
+        display: none;
+    }
+    .has-border-right-md{
+        border: none;
+    }
+}
+
+@media(max-width: 576px){
+    .has-border-right-sm{
+        border: none;
+    }
+}

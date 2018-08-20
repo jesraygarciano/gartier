@@ -1,0 +1,120 @@
+.unick-table{
+  padding: 15px;
+  .header{
+    position: relative;
+  }
+  .body{
+    border-top: 1px solid #d2d6de;
+    .item-row{
+      border-bottom: 1px solid #f8f8f8;
+      &:last-child{
+        border: none;
+      }
+      &:hover{
+        background: #f9f9f9;
+      }
+    }
+  }
+  & .row{
+    margin: 0px;
+  }
+  & .part{
+    padding: 0px;
+  }
+}
+
+.hiring-step-item{
+  position: relative;
+  padding-right: 40px;
+  padding-left: 20px;
+
+  & .left-buttons{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 100%;
+    .fa{
+      font-size: 10px;
+      position: absolute;
+      color: gray;
+      cursor: pointer;
+      &:hover{
+        color: black;
+      }
+    }
+    & .fa-arrow-up{
+      top: 0px;
+    }
+    & .fa-arrow-down{
+      bottom: 0px;
+    }
+  }
+
+  & .right-buttons{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 40px;
+    height: 100%;
+
+    & .fa{
+      font-size: 15px;
+      display: none;
+      cursor: pointer;
+    }
+  }
+
+  &:hover .right-buttons .fa{
+    display: initial;
+  }
+}
+
+.progress-line-container
+{
+  padding: 15px!important;
+}
+.progress-line{
+  padding: 0px;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  & .step{
+    position: absolute;
+    transform: translateX(-50%);
+    .line{
+      position: absolute;
+      height: 2px;
+      width: 300px;
+      background: #d2d6de;
+      top: 50%;
+      right: 0px;
+      transform: translateY(-50%);
+    }
+    & .circle{
+      position: relative;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #d2d6de;
+    }
+  }
+
+  & .active{
+    & .line{
+      background: #007bff;
+    }
+    & .circle{
+      background: #007bff;
+    }
+  }
+
+  &.finished{
+    & .line{
+      background: #28a745;
+    }
+    & .circle{
+      background: #28a745;
+    }
+  }
+}
