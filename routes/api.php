@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         // update
         Route::group(['prefix' => 'update'], function(){
             Route::post('skills', 'UserController@update_skills');
+            Route::post('work_experience', 'UserController@update_work_experience');
+            Route::post('education_background', 'UserController@update_education_background');
             Route::post('user_description', 'UserController@update_description');
             Route::post('basic_info', 'UserController@update_basic_info');
             Route::patch('photo', 'UserController@updatePhoto');
@@ -72,11 +74,15 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::group(['prefix'=>'fetch'], function(){
             Route::get('/', 'CompanyController@fetch');
             Route::get('openings', 'CompanyController@fetch_openings');
-            Route::get('hiring/applications', 'CompanyController@fetchHiringApplications');
+            Route::get('applications', 'CompanyController@fetchHiringApplications');
             Route::get('hiring/applications2', 'CompanyController@fetchHiringApplications2');
             Route::get('collaborators', 'CompanyController@fetchCollaborators');
             Route::post('search', 'CompanyController@fetchCompanySearch');
             Route::get('isBookMarked', 'CompanyController@fetchIsBookMarked');
+            
+            Route::group(['prefix' => 'applicants'], function(){
+                Route::get('lazy_load', 'CompanyController@lazyFetchHiringApplication');
+            });
         });
 
         // add
@@ -129,9 +135,15 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::post('search', 'OpeningController@search');
         });
 
+        // validate
         Route::group(["prefix" => "validate"],function(){
             Route::post('basicInfo', 'OpeningController@validateBasicInfo');
             Route::post('description', 'OpeningController@validateDescription');
+        });
+
+        // delete
+        Route::group(["prefix" => "delete"], function(){
+            Route::delete('soft', 'OpeningController@softDelete');
         });
         
         Route::post('create', 'OpeningController@create');
@@ -148,6 +160,24 @@ Route::group(['middleware' => 'auth:api'], function () {
         // fetch
         Route::group(['prefix' => 'fetch'], function(){
             Route::get('hiringApplications', 'HiringApplicationController@fetchApplications');
+            Route::get('one', 'HiringApplicationController@fetchOneApplication');
+            Route::get('hiring/step/results', 'HiringApplicationController@fetchApplicationStepAndResults');
+            Route::get('results', 'HiringApplicationController@fetchApplicationResults');
+        });
+    });
+
+    // notification routes
+    Route::group(['prefix' => 'notification'], function(){
+        // fetch
+        Route::group(['prefix'=>'fetch'], function(){
+            Route::get('/', 'NotificationController@fetchNotifications');
+            Route::get('one', 'NotificationController@fetchNotification');
+            Route::get('more', 'NotificationController@fetchMoreNotifications');
+            Route::get('unread/count', 'NotificationController@fetchUnreadNotificationCount');
+        });
+        // update
+        Route::group(['prefix'=>'update'], function(){
+            Route::patch('mark_read_all', 'NotificationController@marReadAll');
         });
     });
 });
