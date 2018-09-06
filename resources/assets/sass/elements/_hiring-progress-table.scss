@@ -7,6 +7,8 @@
     border-top: 1px solid #d2d6de;
     .item-row{
       border-bottom: 1px solid #f8f8f8;
+      padding: 5px;
+      padding-bottom: 10px;
       &:last-child{
         border: none;
       }
@@ -20,6 +22,24 @@
   }
   & .part{
     padding: 0px;
+  }
+}
+
+.info-layout{
+  position: relative;
+  padding: 10px 0px;
+  padding-left: 50px;
+  .logo{
+    position: absolute;
+    left: 0px;
+    top: 5px;
+  }
+  .sub-text{
+    font-size: 12px;
+    img{
+      height: 15px;
+      vertical-align: top;
+    }
   }
 }
 
@@ -91,6 +111,10 @@
       right: 0px;
       transform: translateY(-50%);
     }
+    .line-half{
+      left: 0;
+      display: none;
+    }
     & .circle{
       position: relative;
       height: 20px;
@@ -104,6 +128,9 @@
     & .line{
       background: #007bff;
     }
+    & .line-half{
+      display: block;
+    }
     & .circle{
       background: #007bff;
     }
@@ -112,6 +139,9 @@
   &.finished{
     & .line{
       background: #28a745;
+    }
+    & .line-half{
+      display: none;
     }
     & .circle{
       background: #28a745;

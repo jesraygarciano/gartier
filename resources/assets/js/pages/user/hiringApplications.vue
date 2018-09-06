@@ -13,11 +13,10 @@
         </div>
       </div>
     </div>
-    <table class="table table-hover simple-table table-responsive-sm table-hover table-outline mb-0">
-      <thead class="thead-light">
+    <table class="table table-hover simple-table">
+      <thead>
         <tr>
-          <th class="text-center">
-            <i class="fa fa-clipboard"></i>
+          <th>
             Job
           </th>
           <th>
@@ -62,7 +61,7 @@
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Basic Info</h5>
+            <h5 class="modal-title">Application Info</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

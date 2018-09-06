@@ -4,20 +4,21 @@
       <div class="profile-tile-view">
         <cover @update="updateCompany" :company="company" :authorizeEdit="authorizeEdit"/>
         <div class="row">
-          <div class="col-md-2 col-5">
+          <div class="col-lg-2 col-md-3 col-5">
             <logo @update="updateCompany" :company="company" :authorizeEdit="authorizeEdit"/>
           </div>
-          <div class="col-md-5 col-7">
+          <div class="col-lg-5 col-md-5 col-7">
             <h3>{{company.name}}</h3>
+            <!-- <label>Software Developer</label> -->
           </div>
-          <div class="col-md-5 col-12">
+          <div class="col-lg-5 col-md-4 col-12">
             <div class="btn-group pull-right" v-if="authorizeEdit">
               <router-link :to="{ name: 'opening.create', params: {company_id:company_id} }" class="btn btn-light">Create Opening</router-link>
               <span class="dvder"/>
               <div class="dropdown">
                 <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-light">...</button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <router-link class="dropdown-item" :to="{ name: 'company.hiringapplicants', params: {id:company_id} }" data-toggle="dropdown">Hiring Applications</router-link>
+                  <router-link class="dropdown-item" :to="{ name: 'company.applicants', params: {id:company_id} }" data-toggle="dropdown">Hiring Applications</router-link>
                   <router-link class="dropdown-item" :to="{ name: 'company.hiringprocceses', params: {id:company_id} }" data-toggle="dropdown">Hiring Procedures</router-link>
                 </div>
               </div>
@@ -32,7 +33,7 @@
         </div>
         <br>
       </card>
-
+      
       <div class="row">
         <div class="col-md-4">
           <card class="m-tb-10" title="Basic Info">
@@ -76,7 +77,7 @@
           </card>
         </div>
         <div class="col-md-8">
-          <opening-card v-for="(opening,index) in openings" v-bind:key="index" :opening="opening"></opening-card>
+          <opening-card @delete="removeOpening" v-for="(opening,index) in openings" v-bind:key="index" :opening="opening"></opening-card>
         </div>
       </div>
     </div>
@@ -150,6 +151,15 @@ export default {
     },
     prepUpdateWebsiteInfo(){
       this.$refs['website-info-modal-component'].prepUpdate(this.company);
+    },
+    removeOpening(data){
+      for(var i = 0; i < this.openings.length; i++){
+        if(this.openings[i].id == data.id){
+          console.log(i)
+          this.openings.splice(i, 1);
+        }
+      }
+
     }
   },
   created: function(){

@@ -6,15 +6,23 @@ const PasswordReset = () => import('~/pages/auth/password/reset').then(m => m.de
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
 const Home = () => import('~/pages/home').then(m => m.default || m)
+
+// user pages
 const UserProfile = () => import('~/pages/user/index').then(m => m.default || m)
+const ApplicationProgress = () => import('~/pages/user/application-progress-page').then(m => m.default || m)
+
+// company pages
 const CompanyProfile = () => import('~/pages/company/index').then(m => m.default || m)
 const CompanyHiringApplicants = () => import('~/pages/company/hiringApplicants').then(m => m.default || m)
+const CompanyApplicants = () => import('~/pages/hiring/application-list').then(m => m.default || m)
 const CompanyHiringProcesses = () => import('~/pages/company/hiringProcesses').then(m => m.default || m)
 const CompanyHiringProcessesCreate = () => import('~/pages/hiring-process/edit').then(m => m.default || m)
+
+// opening pages
 const OpeningProfile = () => import('~/pages/opening/index').then(m => m.default || m)
 const UserCompanies = () => import('~/pages/user/companies').then(m => m.default || m)
 const OpeningApply = () => import('~/pages/opening/apply').then(m => m.default || m)
-const HiringApplication = () => import('~/pages/user/hiringApplications').then(m => m.default || m)
+const HiringApplications = () => import('~/pages/user/hiringApplications').then(m => m.default || m)
 const CompanyCreate = () => import('~/pages/company/create').then(m => m.default || m)
 const OpeningCreate = () => import('~/pages/opening/create').then(m => m.default || m)
 const OpeningEdit = () => import('~/pages/opening/edit').then(m => m.default || m)
@@ -23,14 +31,10 @@ const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.def
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
 const SearchCompanyPage = () => import('~/pages/company/SearchPage').then(m => m.default || m)
 const SearchOpeningPage = () => import('~/pages/opening/SearchPage').then(m => m.default || m)
-const About = () => import('~/pages/about').then(m => m.default || m)
-const Contact = () => import('~/pages/contact').then(m => m.default || m)
+const HiringApplication = () => import('~/pages/hiring/application').then(m => m.default || m)
 
 export default [
   { path: '/', name: 'welcome', component: Welcome },
-
-  { path: '/about', name: 'about', component: About },
-  { path: '/contact', name: 'contact', component: Contact },
 
   { path: '/login', name: 'login', component: Login },
   { path: '/register', name: 'register', component: Register },
@@ -53,18 +57,22 @@ export default [
   { path: '/company/:id/hiringprocceses', name: 'company.hiringprocceses', component: CompanyHiringProcesses },
   { path: '/company/:company_id/hiringprocceses/create/:id?', name: 'company.hiringprocceses.create', component: CompanyHiringProcessesCreate },
   { path: '/company/search', name: 'company.search', component: SearchCompanyPage },
+  { path: '/company/:id/applications', name: 'company.applicants', component: CompanyApplicants},
 
   // user routes
   { path: '/profile/:id?', name: 'user.profile', component: UserProfile },
   { path: '/user/companies', name: 'user.companies', component: UserCompanies },
+  { path: '/user/application/progress/:application_id', name: 'user.application.progress', component: ApplicationProgress },
 
   // opening routes
   { path: '/opening/profile/:id', name: 'opening.profile', component: OpeningProfile },
   { path: '/opening/search', name: 'opening.search', component: SearchOpeningPage },
   { path: '/opening/:id/edit', name: 'opening.edit', component: OpeningEdit },
   { path: '/company/:company_id/opening/create', name: 'opening.create', component: OpeningCreate },
+  
   // application
-  { path: '/applications', name: 'hiringApplication.applications', component: HiringApplication },
+  { path: '/applications', name: 'hiringApplication.applications', component: HiringApplications },
+  { path: '/applications/:application_id', name: 'hiringApplication.application', component: HiringApplication },
   { path: '/opening/apply/:opening_id/:applicant_id?', name: 'hiringApplication.create', component: OpeningApply },
 
   { path: '*', component: NotFound }

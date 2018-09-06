@@ -53,8 +53,7 @@ $polyfills = [
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>{{ config('app.name') }}</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <meta name="auth_id" content="{{Auth::check() ?? Auth::user()->id}}">
   
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link rel="stylesheet" href="{{ asset('css/common.css') }}">
@@ -72,14 +71,22 @@ $polyfills = [
   {{-- Load the application scripts --}}
   @if (app()->isLocal())
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ asset('js/argon.js') }}"></script>
-
   @else
-    <script src="{{ asset('js/argon.js') }}"></script>
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="https://unpkg.com/vue-ckeditor2"></script>
   @endif
+  <script>
+  function panelManager(target){
+    this.showPanel = function(panel){
+      this.hideAll();
+      jQuery(panel).show();
+    },
+    this.hideAll = function(){
+      jQuery(target).find('.panel').hide();
+    }
+  }
+  </script>
 </body>
 </html>

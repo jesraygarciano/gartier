@@ -27,7 +27,7 @@
         <form @submit.prevent="validateForm1" @keydown="form1.onKeydown($event)">
 
           <div class="text-center">
-            <img ref="opening-picture" v-on:click="showPhotoEditor" :src="form1.photo" class="rounded img-thumbnail" width="200px">
+            <img ref="opening-picture" v-on:click="showPhotoEditor" :src="public_path+'/images/photo.png'" class="rounded img-thumbnail" width="200px">
           </div>
           <br>
           <!-- Title -->
@@ -157,7 +157,7 @@ export default {
 
   data: () => ({
     form1: new Form({
-      photo: location.origin+'/images/photo.png',
+      photo: null,
       title: '',
       salary_range: '',
       professional_years: '',
@@ -193,7 +193,7 @@ export default {
       this.$refs['opening-photo'].src = photo_data;
     },
     showPhotoEditor(){
-      this.$refs['photo-editor'].show(this.form1.photo);
+      this.$refs['photo-editor'].show(this.form1.photo ? this.form1.photo : this.public_path+'/images/photo.png');
     },
     async validateForm1 () {
       console.log(this.form1);
@@ -228,7 +228,7 @@ export default {
       console.log(this.form3);
       console.log(this.form4);
       // 
-      this.form4.post('/api/opening/create');
+      await this.form4.post('/api/opening/create');
 
       this.$router.push("/company/profile/"+this.$route.params.company_id);
     },
@@ -249,9 +249,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.settings-card .card-body {
-  padding: 0;
-}
-</style>

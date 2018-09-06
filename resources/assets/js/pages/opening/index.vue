@@ -1,13 +1,13 @@
 <template>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" v-if="opening">
       <div class="profile-tile-view">
         <div class="profile-cover" style="height: 300px;">
-          <img class="absolute-center" :src="public_path+'/images/opening-background.jpg'">
+          <img class="absolute-center" :src="opening.company.cover">
         </div>
         <div class="row" style="margin-top: -15%;">
           <div class="col-md-6 offset-md-3">
-            <opening-card v-if="opening.id" :opening="opening" :noApply="true">
+            <opening-card :opening="opening" :noApply="true">
               <div style="margin-top: 10px;">
                 <router-link class="btn btn-primary" :to="{ name: 'hiringApplication.create', params: { opening_id: opening.id} }">
                   Apply
@@ -96,8 +96,7 @@ export default {
 
   data : () =>({
     public_path: location.origin,
-    opening_id: null,
-    opening: {},
+    opening: null,
     authorizeEdit: false
   }),
   methods: {
@@ -105,17 +104,19 @@ export default {
       const { data } = await axios({
           method: 'get',
           url: '/api/opening/fetch',
-          params: { opening_id: this.opening_id }
+          params: { opening_id: this.$route.params.id }
         })
       this.opening = data.data;
       this.authorizeEdit = data.meta.authorizeEdit;
     }
   },
-  created: function(){
-    this.opening_id = this.$route.params.id;
-  },
   mounted(){
     this.fetch_opening();
+  },
+  watch: {
+    $route(){
+      this.fetch_opening();
+    }
   }
 }
 </script>
