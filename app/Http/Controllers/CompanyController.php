@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Http\Resources\CompanyResource;
+use App\Http\Resources\ApplicationResource;
 
 class CompanyController extends Controller
 {
+    protected $openingService;
+    protected $applicationService;
+
+    function __construct(){
+        $this->openingService = new \App\Services\OpeningService();
+        $this->applicationService = new  \App\Services\ApplicationService();
+    }
+
     /**
      * Return a filtered list of companies
      * 
@@ -33,9 +42,10 @@ class CompanyController extends Controller
             "website_url" => $request->website_url,
             "province" => $request->province
         ]);
-
-        $company->owner_id = \Auth::user()->id;
+        $auth = \Auth::user();
+        $company->owner_id = $auth->id;
         $company->save();
+        $company->addCollaborator($auth->id);
 
         if($request->photo){
             $company->saveProfilePhoto($request->photo);
@@ -93,7 +103,7 @@ class CompanyController extends Controller
      */
     public function fetch_openings(Request $request){
         $company = Company::find($request->company_id);
-        return ['openings'=>$company->openings()->orderBy('openings.created_at','desc')->get()->load('company')->load('programmingLanguages')->load('technologies')];
+        return ['openings'=> $this->openingService->handleOpeningResource($company->openings)];
     }
 
     /**
@@ -103,7 +113,20 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Resources\JsonResource
      */
     public function fetchHiringApplications(Request $request){
-        return Company::find($request->company_id)->applications->load('opening','opening.hiringProcedure','opening.hiringProcedure.hiring_steps','user','hiringStepResults','hiringStepResults.notes');
+        return ['applications' => Company::find($request->company_id)->applications->load('opening','user')];
+    }
+
+    /**
+     * Lazy load hiring applications
+     * 
+     * @return JsonResource
+     */
+    public function lazyFetchHiringApplication(Request $request){
+        $application_fetch = $this->applicationService->handleCompanyLazyFetchApplications($request);
+        return [
+            'applications' => $application_fetch['applications'],
+            'loaded_all' => $application_fetch['loaded_all']
+        ];
     }
 
     public function fetchHiringApplications2(Request $request){
