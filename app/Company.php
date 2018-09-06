@@ -135,7 +135,7 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function applications(){
-        return $this->hasManyThrough(HiringApplication::class,Opening::class)->orderBy('hiring_applications.created_at', 'desc');
+        return $this->hasManyThrough(HiringApplication::class,Opening::class);
     }
 
     /**
@@ -180,7 +180,16 @@ class Company extends Model
      * @return \Illuminate\Database\Eloquent\Relationship\HasMany
      */
     public function openings(){
-        return $this->hasMany(Opening::class);
+        return $this->hasMany(Opening::class)->orderBy('openings.created_at','desc');
+    }
+
+    /**
+     * Relationship of company followers
+     * 
+     * @return \Illuminate\Database\Eloquent\Relationship\BelongsToMany
+     */
+    public function followers(){
+        return $this->belongsToMany(User::class, 'company_follows', 'company_id', 'user_id');
     }
 
     /**

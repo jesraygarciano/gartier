@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Opening extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = ['title','details','company_id'];
     protected $appends = ['picture'];
 
@@ -197,5 +200,14 @@ class Opening extends Model
      */
     public function hiringProcedure(){
         return $this->belongsTo('\App\HiringStepGroup','hiring_step_group_id');
+    }
+
+    /**
+     * Get Hiring Applications
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function applications(){
+        return $this->hasMany('\App\HiringApplication');
     }
 }
