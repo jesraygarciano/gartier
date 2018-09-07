@@ -15216,6 +15216,18 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   background: #007bff;
 }
 
+.progress-line .inactive .line {
+  background: #dc3545;
+}
+
+.progress-line .inactive .line-half {
+  display: block;
+}
+
+.progress-line .inactive .circle {
+  background: #dc3545;
+}
+
 .progress-line.finished .line {
   background: #28a745;
 }
