@@ -23,20 +23,7 @@ class HiringApplicationController extends Controller
             'application_letter' => 'required',
         ]);
 
-        $hiringApplication = new HiringApplication;
-
-        $hiringApplication->application_letter = $request->application_letter;
-        $hiringApplication->expected_salary = $request->expected_salary;
-        $hiringApplication->user_id = $request->user_id;
-        $hiringApplication->opening_id = $request->opening_id;
-
-        $hiringApplication->save();
-
-        $notifiable = $hiringApplication->opening->company->collaborators()->get();
-
-        Notification::send($notifiable, new NewApplication($hiringApplication));
-
-        return ['status'=>'created', 'hiringApplication'=>$hiringApplication];
+        return ['status'=>'created', 'hiringApplication'=>$this->applicationService->create($request)];
     }
     
     public function fetchApplications(Request $request){
