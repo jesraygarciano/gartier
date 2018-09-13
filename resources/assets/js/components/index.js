@@ -33,7 +33,7 @@ var mixins = {
         'Apr.',
         'May',
         'Jun.',
-        'Jul',
+        'Jul.',
         'Aug.',
         'Sep.',
         'Oct.',

@@ -1,15 +1,53 @@
 <template>
-  <card :title="$t('home')">
-    {{ $t('you_are_logged_in') }}
-  </card>
+  <div>
+    <div class="row">
+      <div class="col-md-3" @click="displayPending">
+        <pending-applications/>
+      </div>
+      <div class="col-md-3" @click="displayInProgress">
+        <in-progress-applications/>
+      </div>
+      <div class="col-md-3" @click="displayFinished">
+        <finished-applications/>
+      </div>
+      <div class="col-md-3" @click="displayInactive">
+        <inactive-applications/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <opening-count/>
+      </div>
+      <div class="col-md-9">
+        <company-logos/>
+        <!-- <div class="border-bottom p-1">Openings</div> -->
+      </div>
+    </div>
+    <application-modal ref="application-modal"/>
+  </div>
 </template>
 
 <script>
+import {OpeningCount, 
+PendingApplications, 
+InProgressApplications, 
+FinishedApplications,
+InactiveApplications,
+CompanyLogos,
+ApplicationModal
+} from './../components/reporting'
+import applicationCountMixin from './mixins/application-count-mixin'
 export default {
   middleware: 'auth',
-
-  metaInfo () {
-    return { title: this.$t('home') }
-  }
+  mixins: [applicationCountMixin],
+  components: {
+    OpeningCount,
+    PendingApplications,
+    InProgressApplications,
+    FinishedApplications,
+    InactiveApplications,
+    CompanyLogos,
+    ApplicationModal
+    },
 }
 </script>

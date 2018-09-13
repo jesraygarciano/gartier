@@ -13,6 +13,43 @@
   }
 }
 
+.logo-list{
+  padding: 0px;
+  list-style: none;
+  display: table;
+  width: 100%;
+  font-size: 12px;
+  li{
+    width: 25%;
+    padding: 10px;
+    float: left;
+    text-align: center;
+    img{
+      border-radius: 50%;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #d6d6d6;
+      background: #efefef;
+    }
+    .title{
+      font-weight: 500;
+      color: inherit;
+      display: block;
+    }
+    .sub-title{
+      color: #999;
+    }
+  }
+
+  @media(min-width: 768px) {
+    &.lg-6{
+      li{
+        width: 16.666%;
+      }
+    }
+  }
+}
+
 .simple-card{
   position: relative;
   border-radius: 3px;
@@ -24,7 +61,64 @@
 
   .simple-card-header{
     font-size: 18px;
-    font-weight: 500;
     padding: 10px;
+    border-bottom: 1px solid #f4f4f4;
+    position: relative;
+  }
+
+  .simple-card-body{
+    position: relative;
+  }
+
+  &.flex{
+    display: flex;
+    .logo{
+      display: flex;
+      padding: 20px;
+    }
+
+    .content{
+      display: flex;
+      flex: 1;
+      position: relative;
+
+      & > *{
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    $yellow: #f39c12;
+    $skyblue: #00c0ef;
+    $green: #00a65a;
+    $red: #DD4A39;
+
+    &.yellow{
+      border-color: $yellow;
+      .logo{
+        color: $yellow;
+      }
+    }
+
+    &.skyblue{
+      border-color: $skyblue;
+      .logo{
+        color: $skyblue;
+      }
+    }
+
+    &.green{
+      border-color: $green;
+      .logo{
+        color: $green;
+      }
+    }
+
+    &.red{
+      border-color: $red;
+      .logo{
+        color: $red;
+      }
+    }
   }
 }
