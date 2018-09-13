@@ -182,7 +182,18 @@ Route::group(['middleware' => 'auth:api'], function () {
         });
         // update
         Route::group(['prefix'=>'update'], function(){
-            Route::patch('mark_read_all', 'NotificationController@marReadAll');
+            Route::patch('mark_read_all', 'NotificationController@markReadAll');
+        });
+    });
+
+    // reporting routes
+    Route::group(['prefix' => 'reporting'], function(){
+        // fetch
+        Route::group(['prefix'=>'fetch'], function(){
+            Route::get('companies', 'ReportController@fetch_companies');
+            Route::get('application/count', 'ReportController@fetchApplicationCount');
+            Route::get('opening/count', 'ReportController@fetchOpeningCount');
+            Route::get('application/count/per/company', 'ReportController@fetchApplicationCountPerCompany');
         });
     });
 });
