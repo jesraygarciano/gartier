@@ -5,6 +5,7 @@ namespace App\Services;
 use \App\Opening;
 use Illuminate\Support\Collection;
 use \App\Http\Resources\OpeningResource;
+use \App\HiringApplication;
 
 class ReportService
 {
@@ -52,5 +53,36 @@ class ReportService
         }
 
         return $companies;
+    }
+
+    function getApplicationReportPerDay($date1, $date2){
+        $seconds_per_day = 86400;
+        $data = [];
+        $dates = [];
+        for($date = strtotime($date1); $date <= strtotime($date2); $date = $date + $seconds_per_day){
+            $count = HiringApplication::whereDate('created_at', date('Y-m-d',$date))->count();
+            array_push($data,$count);
+            array_push($dates,date('Y-m-d',$date));
+        }
+
+        return [
+            "data" => $data,
+            "dates" => $dates
+        ];
+    }
+
+    function getApplicationReportPerMonth($month1, $month2){
+        $data = [];
+        $dates = [];
+        for($m1 = strtotime($month1); $m1 <= strtotime($month2); $m1=strtotime(date('Y-m',$m1).' next month')){
+            $count = HiringApplication::whereDate('created_at','>',$m1)->whereDate('created_at', '<',strtotime(date('Y-m',$m1).' next month'))->count();
+            array_push($data,$count);
+            array_push($dates,date('Y-m-d',$date));
+        }
+
+        return [
+            "data" => $data,
+            "dates"=> $dates
+        ];
     }
 }

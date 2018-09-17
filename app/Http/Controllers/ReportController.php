@@ -49,4 +49,10 @@ class ReportController extends Controller
         return ["companies" => $this->reportService->getApplicationCountPerCompany($request)];
     }
     
+    /**
+     * Return application chart data per day
+     */
+    public function fetchApplicationChartDataPerDay(Request $request){
+        return ['chart_data'=>$this->reportService->getApplicationReportPerDay($request->date1, $request->date2)];
+    }
 }
