@@ -194,6 +194,7 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::get('application/count', 'ReportController@fetchApplicationCount');
             Route::get('opening/count', 'ReportController@fetchOpeningCount');
             Route::get('application/count/per/company', 'ReportController@fetchApplicationCountPerCompany');
+            Route::get('application/count/per/day', 'ReportController@fetchApplicationChartDataPerDay');
         });
     });
 });
