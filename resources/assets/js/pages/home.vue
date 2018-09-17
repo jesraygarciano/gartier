@@ -17,10 +17,10 @@
     <div class="row">
       <div class="col-md-3">
         <opening-count/>
+        <company-logos/>
       </div>
       <div class="col-md-9">
-        <company-logos/>
-        <!-- <div class="border-bottom p-1">Openings</div> -->
+        <application-count-line/>
       </div>
     </div>
     <application-modal ref="application-modal"/>
@@ -34,7 +34,8 @@ InProgressApplications,
 FinishedApplications,
 InactiveApplications,
 CompanyLogos,
-ApplicationModal
+ApplicationModal,
+ApplicationCountLine,
 } from './../components/reporting'
 import applicationCountMixin from './mixins/application-count-mixin'
 export default {
@@ -47,7 +48,8 @@ export default {
     FinishedApplications,
     InactiveApplications,
     CompanyLogos,
-    ApplicationModal
+    ApplicationModal,
+    ApplicationCountLine
     },
 }
 </script>

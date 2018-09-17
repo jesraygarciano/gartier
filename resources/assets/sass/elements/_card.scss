@@ -14,16 +14,17 @@
 }
 
 .logo-list{
-  padding: 0px;
-  list-style: none;
-  display: table;
-  width: 100%;
-  font-size: 12px;
+  ul{
+    padding: 0px;
+    list-style: none;
+    font-size: 12px;
+  }
+
   li{
     width: 25%;
     padding: 10px;
-    float: left;
     text-align: center;
+    display: inline-block;
     img{
       border-radius: 50%;
       max-width: 100%;
@@ -41,10 +42,23 @@
     }
   }
 
-  @media(min-width: 768px) {
-    &.lg-6{
+  @media(min-width: 1024px) {
+    .lg-6{
       li{
         width: 16.666%;
+      }
+    }
+    .lg-3{
+      li{
+        width: 33.333%;
+      }
+    }
+  }
+
+  @media(min-width: 768px) {
+    .md-2{
+      li{
+        width: 50%;
       }
     }
   }

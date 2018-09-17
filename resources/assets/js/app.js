@@ -4,6 +4,7 @@ import router from '~/router'
 import i18n from '~/plugins/i18n'
 import App from '~/components/App'
 import jQuery from 'jquery'
+let moment = require("moment")
 import Echo from "laravel-echo"
 
 window.Pusher = require('pusher-js');
@@ -21,8 +22,10 @@ window.Echo = new Echo({
 });
 
 global.jQuery = jQuery
+global.moment = moment
 global.Vue = Vue
 let Bootstrap = require('bootstrap');
+require("bootstrap-datepicker")
 
 import '~/plugins'
 import '~/components'

@@ -4,13 +4,15 @@
       Companies
     </div>
     <div class="simple-card-body" v-if="finished">
-      <ul class="logo-list lg-6">
-        <li v-for="company in companies" v-bind:key="company.id">
-          <img :src="company.photo">
-          <router-link :to="{ name: 'company.profile', params: {id:company.id}}" class="text-truncate title">{{company.name}}</router-link>
-          <div class="text-truncate sub-title">{{formatedDate(company.created_at)}}</div>
-        </li>
-      </ul>
+      <div class="logo-list">
+        <ul class="md-2">
+          <li v-for="company in companies" v-bind:key="company.id">
+            <img :src="company.photo">
+            <router-link :to="{ name: 'company.profile', params: {id:company.id}}" class="text-truncate title">{{company.name}}</router-link>
+            <div class="text-truncate sub-title">{{formatedDate(company.created_at)}}</div>
+          </li>
+        </ul>
+      </div>
     </div>
     <center v-else>
       <unick-loader class="loader" />

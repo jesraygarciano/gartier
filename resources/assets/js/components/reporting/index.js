@@ -6,3 +6,4 @@ export {
   CompanyLogos
 }
 export * from './counts/applications'
+export * from './charts'
