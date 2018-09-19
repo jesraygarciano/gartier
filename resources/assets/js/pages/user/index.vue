@@ -262,6 +262,7 @@ import userAddressInfoModal from './index-components/addressInfoModal'
 import userContactInfoModal from './index-components/contactInfoModal'
 import workExperienceModal from './index-components/workExperience'
 import educationalBackgroundModal from './index-components/educationalBackground'
+import SkillSelector from './../../components/SkillSelector'
 
 export default {
   middleware: 'auth',
@@ -272,7 +273,8 @@ export default {
     cover,
     vuePhotoEditor,
     workExperienceModal,
-    educationalBackgroundModal
+    educationalBackgroundModal,
+    SkillSelector
   },
   data : () =>({
     public_path: location.origin,

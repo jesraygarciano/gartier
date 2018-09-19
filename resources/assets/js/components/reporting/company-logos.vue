@@ -5,7 +5,7 @@
     </div>
     <div class="simple-card-body" v-if="finished">
       <div class="logo-list">
-        <ul class="md-2">
+        <ul class="md-2 lg-3">
           <li v-for="company in companies" v-bind:key="company.id">
             <img :src="company.photo">
             <router-link :to="{ name: 'company.profile', params: {id:company.id}}" class="text-truncate title">{{company.name}}</router-link>

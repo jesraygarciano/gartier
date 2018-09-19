@@ -1,4 +1,3 @@
-const Welcome = () => import('~/pages/welcome').then(m => m.default || m)
 const Login = () => import('~/pages/auth/login').then(m => m.default || m)
 const Register = () => import('~/pages/auth/register').then(m => m.default || m)
 const PasswordEmail = () => import('~/pages/auth/password/email').then(m => m.default || m)
@@ -34,8 +33,9 @@ const Settings = () => import('~/pages/settings/index').then(m => m.default || m
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
 const SearchCompanyPage = () => import('~/pages/company/SearchPage').then(m => m.default || m)
-const SearchOpeningPage = () => import('~/pages/opening/SearchPage').then(m => m.default || m)
-const HiringApplication = () => import('~/pages/hiring/application').then(m => m.default || m)
+const SearchOpeningPage = () => import('~/pages/opening/search/index').then(m => m.default || m)
+
+const Welcome = () => import('~/pages/guest/welcome').then(m => m.default || m)
 
 export default [
   { path: '/', name: 'welcome', component: Welcome },
@@ -84,7 +84,7 @@ export default [
   
   // application
   { path: '/applications', name: 'hiringApplication.applications', component: HiringApplications },
-  { path: '/applications/:application_id', name: 'hiringApplication.application', component: HiringApplication },
+  { path: '/applications/:application_id', name: 'hiringApplication.application', component: ApplicationProgress },
   { path: '/opening/apply/:opening_id/:applicant_id?', name: 'hiringApplication.create', component: OpeningApply },
 
   { path: '*', component: NotFound }

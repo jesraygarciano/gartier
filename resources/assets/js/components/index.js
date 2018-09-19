@@ -12,7 +12,6 @@ import OpeningCard from './OpeningCard'
 import PhotoConverter from './PhotoConverter'
 import IconizedPhoto from './IconizedPhoto'
 import Wizard from './Wizard'
-import SkillSelector from './SkillSelector'
 import CompanyCard from './CompanyCard'
 import IconButton from './IconButton'
 import UnickTable from './UnickTable'
@@ -66,7 +65,6 @@ Vue.mixin(mixins);
   Checkbox,
   HasError,
   LineInput,
-  SkillSelector,
   EllipsisText,
   AlertError,
   SkillIcon,

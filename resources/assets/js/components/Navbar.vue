@@ -20,7 +20,7 @@
             </li>
           </ul>
         </div>
-        <router-link class="nav-link text-dark" :to="{ name: 'user.profile' }">
+        <router-link v-if="user" class="nav-link text-dark" :to="{ name: 'user.profile' }">
           <img :src="user.photo" class="rounded-circle profile-photo mr-1">
           <span class="hidden-md">{{ user.first_name + " " + user.last_name}}</span>
         </router-link>

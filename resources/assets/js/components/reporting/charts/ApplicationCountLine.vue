@@ -11,7 +11,7 @@
           </div>
           <input type="text" class="form-control actual_range from" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">to {{from}}</span>
+            <span class="input-group-text" id="inputGroup-sizing-sm">to</span>
           </div>
           <input type="text" class="form-control actual_range to" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>

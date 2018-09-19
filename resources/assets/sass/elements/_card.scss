@@ -42,6 +42,14 @@
     }
   }
 
+  @media(min-width: 768px) {
+    .md-2{
+      li{
+        width: 50%;
+      }
+    }
+  }
+
   @media(min-width: 1024px) {
     .lg-6{
       li{
@@ -51,14 +59,6 @@
     .lg-3{
       li{
         width: 33.333%;
-      }
-    }
-  }
-
-  @media(min-width: 768px) {
-    .md-2{
-      li{
-        width: 50%;
       }
     }
   }
@@ -135,4 +135,141 @@
       }
     }
   }
+}
+
+// Bootstrap WelcomeVue Card
+
+/*Profile card 2*/
+.profile-card-2 .card-img-block{
+  float:left;
+  width:100%;
+  height:150px;
+  overflow:hidden;
+}
+.profile-card-2 .card-body{
+  position:relative;
+}
+
+.profile-card-2 .card-body .card-title{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-card-2 .profile {
+// border-radius: B50%;
+max-width: 100px;
+border: 3px solid rgba(255, 255, 255, 1);
+}
+.profile-card-2 h5{
+  font-weight:600;
+  color:#311c8a;
+}
+.profile-card-2 .card-text{
+  font-weight:300;
+  font-size:15px;
+}
+.profile-card-2 .icon-block{
+  float:left;
+  width:100%;
+}
+.profile-card-2 .icon-block a{
+  text-decoration:none;
+}
+.profile-card-2 i {
+display: inline-block;
+  font-size: 16px;
+  color: #281483;
+  text-align: center;
+  border: 1px solid #281483;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  margin:0 5px;
+}
+.profile-card-2 i:hover {
+background-color:#281483;
+color:#fff;
+}
+
+.profile-card-2 .icon-block{
+  // border-top: 1px solid rgba(151,22,226,.6);
+  // padding-top: 1em;
+  margin-top: 5px;
+}
+
+.profile-card-2 .icon-block span{
+
+  border-top: 1px solid rgba(151,22,226,.6);
+  padding-top: 7px;
+  font-size: 13px;
+
+}
+
+// Bootstrap Company Card WelcomeVue
+/*Profile card 4*/
+.profile-card-4 .card-img-block{
+  float:left;
+  width:100%;
+  height:150px;
+  overflow:hidden;
+}
+.profile-card-4 .card-body{
+  position:relative;
+}
+.profile-card-4 .profile {
+  border-radius: 50%;
+  position: absolute;
+  top: -62px;
+  left: 50%;
+  width:100px;
+  border: 3px solid rgba(255, 255, 255, 1);
+  margin-left: -50px;
+}
+.profile-card-4 .card-img-block{
+  position:relative;
+}
+.profile-card-4 h5{
+  font-weight:600;
+  color:#311c8a;
+}
+.profile-card-4 .card-text{
+  margin: 5px;
+  font-weight:300;
+  font-size:15px;
+}
+.profile-card-4 .icon-block{
+  float:left;
+  width:100%;
+}
+.profile-card-4 .icon-block a{
+  text-decoration:none;
+}
+.profile-card-4 i {
+display: inline-block;
+  font-size: 16px;
+  color: #311c8a;
+  text-align: center;
+  border: 1px solid #311c8a;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  margin:0 5px;
+}
+.profile-card-4 i:hover {
+background-color:#311c8a;
+color:#fff;
+}
+.profile-card-4 .btn-outline-secondary {
+  font-size: 16px;
+  color: #311c8a;
+  text-align: center;
+  border: 1px solid #311c8a;
+  margin:0 5px;
+}
+.profile-card-4 .btn-outline-secondary:hover {
+  background-color:#311c8a;
+  color:#fff;
 }

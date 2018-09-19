@@ -144,10 +144,12 @@
 import Form from 'vform'
 import axios from 'axios'
 import vuePhotoEditor from 'unick-vue-photo-editor';
+import SkillSelector from './../../components/SkillSelector'
 export default {
   middleware: 'auth',
   components: {
-    vuePhotoEditor
+    vuePhotoEditor,
+    SkillSelector
   },
 
   metaInfo () {
