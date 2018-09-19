@@ -129,11 +129,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // opening routes
     Route::group([ "prefix" => "opening" ], function(){
-        // fetch
-        Route::group(['prefix'=>'fetch'], function(){
-            Route::get('/', 'OpeningController@fetch');
-            Route::post('search', 'OpeningController@search');
-        });
 
         // validate
         Route::group(["prefix" => "validate"],function(){
@@ -207,4 +202,13 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
+});
+
+// opening
+Route::group([ "prefix" => "opening" ], function(){
+    // fetch
+    Route::group(['prefix'=>'fetch'], function(){
+        Route::get('/', 'OpeningController@fetch');
+        Route::post('search', 'OpeningController@search');
+    });
 });
