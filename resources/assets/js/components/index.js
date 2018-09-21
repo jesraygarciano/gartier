@@ -17,6 +17,7 @@ import IconButton from './IconButton'
 import UnickTable from './UnickTable'
 import EntityHeader from './EntityHeader'
 import UnickLoader from './loaders/roller'
+import DocumentUploadInput from './input/document-upload'
 import { HasError, AlertError, AlertSuccess } from 'vform'
 
 var mixins = {
@@ -76,7 +77,8 @@ Vue.mixin(mixins);
   PhotoConverter,
   Wizard,
   AlertSuccess,
-  UnickLoader
+  UnickLoader,
+  DocumentUploadInput
 ].forEach(Component => {
   Vue.component(Component.name, Component)
 })

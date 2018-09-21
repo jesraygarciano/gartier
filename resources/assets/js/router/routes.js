@@ -24,7 +24,7 @@ const CompanyHiringProcessesCreate = () => import('~/pages/hiring-process/edit')
 // opening pages
 const OpeningProfile = () => import('~/pages/opening/index').then(m => m.default || m)
 const UserCompanies = () => import('~/pages/user/companies').then(m => m.default || m)
-const OpeningApply = () => import('~/pages/opening/apply').then(m => m.default || m)
+const OpeningApply = () => import('~/pages/opening/apply/index').then(m => m.default || m)
 const HiringApplications = () => import('~/pages/user/hiringApplications').then(m => m.default || m)
 const CompanyCreate = () => import('~/pages/company/create').then(m => m.default || m)
 const OpeningCreate = () => import('~/pages/opening/create').then(m => m.default || m)
@@ -32,7 +32,7 @@ const OpeningEdit = () => import('~/pages/opening/edit').then(m => m.default || 
 const Settings = () => import('~/pages/settings/index').then(m => m.default || m)
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
-const SearchCompanyPage = () => import('~/pages/company/SearchPage').then(m => m.default || m)
+const SearchCompanyPage = () => import('~/pages/company/search').then(m => m.default || m)
 const SearchOpeningPage = () => import('~/pages/opening/search/index').then(m => m.default || m)
 
 const Welcome = () => import('~/pages/guest/welcome').then(m => m.default || m)

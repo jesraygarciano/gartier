@@ -92,8 +92,6 @@
 <script>
 import axios from 'axios'
 export default {
-  middleware: 'auth',
-
   data : () =>({
     public_path: location.origin,
     opening: null,
@@ -120,9 +118,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.settings-card .card-body {
-  padding: 0;
-}
-</style>

@@ -20,7 +20,6 @@
 <script>
 import axios from 'axios'
 import Form from 'vform'
-import Vue from 'vue'
 import SearchBar from './search-bar'
 
 export default {

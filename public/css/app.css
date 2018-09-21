@@ -13958,6 +13958,8 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-actions {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -14024,7 +14026,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 
 .swal2-popup .swal2-styled {
-  margin: 0 .3125em;
+  margin: .3125em;
   padding: .625em 2em;
   font-weight: 500;
   -webkit-box-shadow: none;
@@ -14223,7 +14225,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 
 .swal2-popup .swal2-input {
   height: 2.625em;
-  padding: 0.75em;
+  padding: 0 0.75em;
 }
 
 .swal2-popup .swal2-input[type='number'] {
@@ -15841,7 +15843,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   width: 100%;
   background: #1677a2;
   height: 5px;
-  right: 0px;
+  right: 100%;
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -16137,7 +16139,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   color: #FFF;
 }
 
-footer {
+footer.footer {
   width: 100%;
   background-color: #263238;
   min-height: 250px;
@@ -16149,7 +16151,7 @@ footer {
   margin-bottom: 20px;
 }
 
-footer p {
+footer.footer p {
   font-size: 13px;
   color: #CCC;
   padding-bottom: 0px;
