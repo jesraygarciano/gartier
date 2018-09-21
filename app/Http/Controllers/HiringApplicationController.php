@@ -18,12 +18,13 @@ class HiringApplicationController extends Controller
     }
 
     public function createApplication(Request $request){
-
         $this->validate($request,[
             'application_letter' => 'required',
         ]);
 
-        return ['status'=>'created', 'hiringApplication'=>$this->applicationService->create($request)];
+        $result = $this->applicationService->create($request);
+
+        return ['status'=>'created', 'hiringApplication'=> $result["hiringApplication"], "token" => $result["token"]];
     }
     
     public function fetchApplications(Request $request){
@@ -66,5 +67,32 @@ class HiringApplicationController extends Controller
         $this->applicationService->setApplicationInactive($application);
 
         return ['status'=>'success', 'message'=>'Application Dismissed'];
+    }
+
+    /**
+     * Validate Guest Onsite Registration
+     */
+    public function guestOnsiteRegistrationValidate(Request $request){
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required|max:255',
+            'birth_date' => 'required|max:255|date',
+            'email' => 'required|email|max:255|unique:users',
+            "number" => "required",
+            "resume_file" => "required",
+            "password" => "required|min:6|confirmed"
+        ]);
+
+        return ["status"=>"success"];
+    }
+
+    /**
+     * Handles resume file temporary upload
+     */
+    public function uploadTempResumeFile(Request $request){
+        $filename = $this->applicationService->handleTempDocUploadRequest($request);
+
+        return ["status" => "success", "filename"=> $filename];
     }
 }
