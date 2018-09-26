@@ -13,9 +13,11 @@ use \App\Company;
 class ReportController extends Controller
 {
     protected $reportService;
+    protected $applicationService;
 
     function __construct(){
         $this->reportService = new \App\Services\ReportService;
+        $this->applicationService = new \App\Services\ApplicationService;
     }
 
     /**
@@ -54,5 +56,26 @@ class ReportController extends Controller
      */
     public function fetchApplicationChartDataPerDay(Request $request){
         return ['chart_data'=>$this->reportService->getApplicationReportPerDay($request->date1, $request->date2)];
+    }
+
+    /**
+     * Return Application Count for current user
+     */
+    public function fetchApplicantApplicationCount(Request $request){
+        return ['count'=>$this->reportService->getApplicantApplicationCount()];
+    }
+
+    /**
+     * Return Followed Companies for current user
+     */
+    public function fetchFollowedCompanies(Request $request){
+        return ['companies' => $this->reportService->getFollowedCompanies()];
+    }
+
+    /**
+     * Return Recent Applications for current user
+     */
+    public function fetchRecentApplications(Request $request){
+        return ['applications'=> $this->applicationService->getRecentApplications()->load('opening','user','opening.company')];
     }
 }

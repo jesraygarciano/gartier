@@ -152,6 +152,16 @@ class ApplicationService
         ];
     }
 
+    /**
+     * Returns recent or last five applications of the current Auth
+     */
+    function getRecentApplications(){
+        $user = \Auth::user();
+        return $user->hiringApplications()
+        ->orderBy('hiring_applications.created_at','desc')
+        ->limit(5)->get();
+    }
+
     // methods for setting application status
 
     function setApplicationSubmitted($application){

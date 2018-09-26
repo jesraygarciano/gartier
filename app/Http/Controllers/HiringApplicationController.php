@@ -24,7 +24,7 @@ class HiringApplicationController extends Controller
 
         $result = $this->applicationService->create($request);
 
-        return ['status'=>'created', 'hiringApplication'=> $result["hiringApplication"], "token" => $result["token"]];
+        return ['status'=>'created', 'hiringApplication'=> $result["hiringApplication"], "token" => isset($result["token"]) ? $result["token"] : null];
     }
     
     public function fetchApplications(Request $request){

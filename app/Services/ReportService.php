@@ -59,9 +59,14 @@ class ReportService
         $seconds_per_day = 86400;
         $data = [];
         $dates = [];
+        $opening_ids = collect();
+        foreach(\Auth::user()->managedCompanies as $company){
+            $opening_ids = $opening_ids->merge($company->openings->pluck('id'));
+        }
         for($date = strtotime($date1); $date <= strtotime($date2); $date = $date + $seconds_per_day){
-            $count = HiringApplication::whereDate('created_at', date('Y-m-d',$date))->count();
-            array_push($data,$count);
+            $count = HiringApplication::whereDate('created_at', date('Y-m-d',$date))->whereIn('opening_id',$opening_ids)->count();
+            
+            array_push($data,$date > time() ? null : $count);
             array_push($dates,date('Y-m-d',$date));
         }
 
@@ -84,5 +89,15 @@ class ReportService
             "data" => $data,
             "dates"=> $dates
         ];
+    }
+
+    function getApplicantApplicationCount(){
+        $user = \Auth::user();
+        return $user->hiringApplications()->count();
+    }
+
+    function getFollowedCompanies(){
+        $user = \Auth::user();
+        return $user->followedCompanies;
     }
 }
