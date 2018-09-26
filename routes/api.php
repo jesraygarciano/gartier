@@ -175,13 +175,19 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // reporting routes
     Route::group(['prefix' => 'reporting'], function(){
-        // fetch
-        Route::group(['prefix'=>'fetch'], function(){
+        // recruiter
+        Route::group(['prefix'=>'recruiter'], function(){
             Route::get('companies', 'ReportController@fetch_companies');
             Route::get('application/count', 'ReportController@fetchApplicationCount');
             Route::get('opening/count', 'ReportController@fetchOpeningCount');
             Route::get('application/count/per/company', 'ReportController@fetchApplicationCountPerCompany');
             Route::get('application/count/per/day', 'ReportController@fetchApplicationChartDataPerDay');
+        });
+        // applicant
+        Route::group(['prefix'=>'applicant'], function(){
+            Route::get('application/count', 'ReportController@fetchApplicantApplicationCount');
+            Route::get('followed/companies', 'ReportController@fetchFollowedCompanies');
+            Route::get('recent/applications', 'ReportController@fetchRecentApplications');
         });
     });
 });
@@ -197,7 +203,7 @@ Route::group(['middleware' => 'guest:api'], function () {
 });
 
 /**
- * guest accessible
+ * public accessible
  */
 // opening
 Route::group([ "prefix" => "opening" ], function(){
