@@ -20,11 +20,11 @@ export default {
   methods: {
     show(){
       jQuery(this.$refs.popup).removeClass('hidden');
-      jQuery('body').css({overflow:'hidden'});
+      jQuery('.sidebar-scroll-cancelled, body').css({overflow:'hidden'});
     },
     hide(){
       jQuery(this.$refs.popup).addClass('hidden');
-      jQuery('body').css({overflow:'auto'});
+      jQuery('.sidebar-scroll-cancelled, body').css({overflow:'auto'});
     }
   },
   mounted(){

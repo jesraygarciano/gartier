@@ -6,6 +6,7 @@ import App from '~/components/App'
 import jQuery from 'jquery'
 let moment = require("moment")
 import Echo from "laravel-echo"
+window.layout_events=[]
 
 window.Pusher = require('pusher-js');
 

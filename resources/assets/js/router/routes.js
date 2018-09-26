@@ -35,6 +35,10 @@ const SettingsPassword = () => import('~/pages/settings/password').then(m => m.d
 const SearchCompanyPage = () => import('~/pages/company/search').then(m => m.default || m)
 const SearchOpeningPage = () => import('~/pages/opening/search/index').then(m => m.default || m)
 
+// dashboard
+const RecruiterDashboard = () => import('~/pages/dashboard/recruiter').then(m => m.default || m)
+const ApplicantDashboard = () => import('~/pages/dashboard/applicant').then(m => m.default || m)
+
 const Welcome = () => import('~/pages/guest/welcome').then(m => m.default || m)
 
 export default [
@@ -46,6 +50,11 @@ export default [
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
 
   { path: '/home', name: 'home', component: Home },
+
+  // dashboards
+  { path: '/dashboard/recruiter', name: 'dashboard.recruiter', component: RecruiterDashboard },
+  { path: '/dashboard/applicant', name: 'dashboard.applicant', component: ApplicantDashboard },
+
   { path: '/settings',
     component: Settings,
     children: [

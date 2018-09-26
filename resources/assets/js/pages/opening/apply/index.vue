@@ -217,6 +217,13 @@ export default {
   }),
   mounted(){
     this.fetch_opening();
+  },
+  watch: {
+    user(){
+      console.log('asdds')
+      this.fetch_opening()
+      this.$refs.wizard.renderLines()
+    }
   }
 }
 </script>

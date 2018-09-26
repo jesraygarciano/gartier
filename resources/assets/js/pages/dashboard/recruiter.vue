@@ -37,7 +37,7 @@ CompanyLogos,
 ApplicationModal,
 ApplicationCountLine,
 } from '~/components/reporting/recruiter'
-import applicationCountMixin from './mixins/application-count-mixin'
+import applicationCountMixin from '~/pages/mixins/application-count-mixin'
 export default {
   middleware: 'auth',
   mixins: [applicationCountMixin],

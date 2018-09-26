@@ -66,9 +66,14 @@ async function beforeEach (to, from, next) {
   const middleware = getMiddleware(components)
 
   // Call each middleware.
-  callMiddleware(middleware, to, from, (...args) => {
-    // Set the application layout only if "next()" was called with no args.
-    if (args.length === 0) {
+  callMiddleware(middleware, to, from, async (...args) => {
+    
+    // Set the application layout to admin if current user role is equal to 1 which means current user is company owner
+    if(store.getters['auth/user'] && store.getters['auth/user'].role == 1){
+      router.app.setLayout('company_owner')
+    }
+    // Else set the application layout only if "next()" was called with no args.
+    else if (args.length === 0) {
       router.app.setLayout(components[0].layout || '')
     }
 
