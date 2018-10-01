@@ -3,13 +3,15 @@
     <div class="row">
       <div class="col-md-12">
         <div class="profile-tile-view">
-          <cover :user="user" @update="updateUser"/>
+          <div class="profile-cover">
+            <img class="absolute-center" :src="user.cover_photo" v-on:click="prepUpdateCover">
+          </div>
           <div class="row">
             <div class="col-lg-2 col-md-3 col-5">
               <div class="profile-photo">
-                <div class="scaffold-div" v-on:click="showPhotoEditor">
+                <div class="scaffold-div">
                   <img class="bg-holder" :src="public_path+'/images/bg-img.png'">
-                  <img class="absolute-center" :src="user.photo">
+                  <img class="absolute-center" v-on:click="prepUpdatePhoto" :src="user.photo">
                 </div>
               </div>
             </div>
@@ -125,7 +127,7 @@
                   Information not available.
                 </div>
                 <div v-if="authorizeEdit" style="margin-bottom: 20px;">
-                  <icon-button data-toggle="modal" data-target="#skill-modal">
+                  <icon-button v-on:click.native="prepUpdateSkills">
                     ADD SKILLS
                   </icon-button>
                 </div>
@@ -156,7 +158,7 @@
               </div>
               <info-preview v-for="(experience, index) in workExperiences" icon="company" v-bind:key="index" :title="experience.company_name" :subtitle="experience.position">
                 {{experience.length}}
-                <template slot="options">
+                <template slot="options" v-if="authorizeEdit">
                   <i class="option-btn fa fa-edit" v-on:click="prepEditWorkExperience(experience)"></i>
                   <i class="option-btn fa fa-close" v-on:click="prepDeleteWorkExperience(experience, index)"></i>
                 </template>
@@ -181,31 +183,6 @@
                 </template>
               </info-preview>
             </card>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="skill-modal" tabindex="-1" role="dialog">
-      <div v-if="authorizeEdit" class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-content">
-            <form @submit.prevent="validateSkillsForm" @keydown="skillsForm.onKeydown($event)">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Select your skills</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body" style="max-height: 450px; overflow:auto;">
-                <skill-selector ref="skillsSelector" :form="skillsForm">
-                  <!--  -->
-                </skill-selector>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <v-button :loading="skillsForm.busy" type="success">Save</v-button>
-              </div>
-            </form>
           </div>
         </div>
       </div>
@@ -246,6 +223,9 @@
     <work-experience-modal v-if="authorizeEdit" ref="work-experience-modal" @update="updateWorkExperience"/>
     <educational-background-modal v-if="authorizeEdit" ref="educational-background-modal" @update="updateEducationalBackground"/>
     <vue-photo-editor title="Profile Photo" ref="photo-editor" @update="updateUserPhoto"/>
+    <skills-modal @update="updateSkills" ref="skills-modal"/>
+    <profile-picture-modal ref="profile-picture-modal" @update="updateUserPhoto"/>
+    <cover-picture-modal ref="cover-modal" @update="updateCover"/>
   </div>
 </template>
 
@@ -255,14 +235,15 @@ import axios from 'axios'
 import swal from 'sweetalert2'
 import Form from 'vform'
 import { mapGetters } from 'vuex'
-import cover from './Cover'
 import vuePhotoEditor from 'unick-vue-photo-editor';
 import userBasicInfoModal from './index-components/basicInfoModal'
 import userAddressInfoModal from './index-components/addressInfoModal'
 import userContactInfoModal from './index-components/contactInfoModal'
 import workExperienceModal from './index-components/workExperience'
 import educationalBackgroundModal from './index-components/educationalBackground'
-import SkillSelector from './../../components/SkillSelector'
+import SkillsModal from './index-components/skillsModal'
+import ProfilePictureModal from '~/components/photo-editors/profilePictureModal'
+import CoverPictureModal from '~/components/photo-editors/coverPictureModal'
 
 export default {
   middleware: 'auth',
@@ -270,11 +251,12 @@ export default {
     userBasicInfoModal,
     userAddressInfoModal,
     userContactInfoModal,
-    cover,
     vuePhotoEditor,
     workExperienceModal,
     educationalBackgroundModal,
-    SkillSelector
+    SkillsModal,
+    ProfilePictureModal,
+    CoverPictureModal
   },
   data : () =>({
     public_path: location.origin,
@@ -299,24 +281,26 @@ export default {
       user_id: '',
       description: ''
     }),
+    authorizeEdit: false
   }),
   methods: {
-    showPhotoEditor(){
-      if(this.authorizeEdit()){
-        this.$refs['photo-editor'].show(this.user.photo);
-      }
-    },
     async updateUserPhoto(photo_data){
       var form = new Form({
         photo_data: photo_data
       });
 
-      this.$refs['photo-editor'].loading(true);
-
       const {data} = await form.patch('/api/userInfo/update/photo');
       await this.$store.dispatch('auth/fetchUser')
       this.user = data;
-      this.$refs['photo-editor'].loading(false);
+    },
+    async updateCover(canvasDataURL){
+      var form = new Form({
+        photo_data: canvasDataURL
+      });
+
+      const {data} = await form.patch('/api/userInfo/update/cover');
+      this.$emit('update',data);
+      this.user.cover_photo = data.cover_photo
     },
     async fetch(fetch){
       axios({
@@ -327,11 +311,19 @@ export default {
           this[fetch] = data.data;
         });
     },
-    async validateSkillsForm(){
-      const {data} = await this.skillsForm.post('/api/userInfo/update/skills');
-      this.programmingLanguages = data.programming_languages;
-      this.userTechnologies = data.technologies;
-      jQuery('#skill-modal').modal('hide');
+    prepUpdatePhoto(){
+      if(this.authorizeEdit){
+        this.$refs['profile-picture-modal'].prepUpdate(this.user.photo)
+      }
+    },
+    prepUpdateCover(){
+      if(this.authorizeEdit){
+        this.$refs['cover-modal'].prepUpdate(this.user.cover_photo)
+      }
+    },
+    updateSkills(data){
+      this.programmingLanguages = data.programmingLanguages
+      this.userTechnologies = data.userTechnologies
     },
     async updateDescription(){
       const {data} = await this.userDescriptionForm.post('/api/userInfo/update/user_description');
@@ -346,6 +338,9 @@ export default {
     },
     prepUpdateBasicInfo(){
       this.$refs['user-basic-info-modal'].prepUpdate(this.user);
+    },
+    prepUpdateSkills(){
+      this.$refs['skills-modal'].prepUpdate()
     },
 
     // work experience methods
@@ -583,29 +578,26 @@ export default {
       this.userDescriptionForm.user_id = this.$store.getters['auth/user'].id;
       this.userDescriptionForm.description = this.$store.getters['auth/user'].description;
       this.fetch('user');
-      this.fetch('programmingLanguages');
-      this.fetch('userTechnologies');
       this.fetch('workExperiences');
       this.fetch('userAddresses');
       this.fetch('educationalBackgrounds');
       this.fetch('followedCompanies');
       this.fetch('userContactNumbers');
     },
-    authorizeEdit(){
-      return this.user.id == this.$store.getters['auth/user'].id
+    validateAuth(){
+      this.authorizeEdit = this.user.id == this.$store.getters['auth/user'].id
     }
   },
   mounted(){
     var $this = this;
     this.loadEveryThing();
-    jQuery('#skill-modal').on('show.bs.modal',function(){
-      $this.$refs.skillsSelector.updateProgrammingLanguages($this.programmingLanguages);
-      $this.$refs.skillsSelector.updateTechnologies($this.userTechnologies);
-    });
   },
   watch: {
     $route(){
       this.loadEveryThing();
+    },
+    user(){
+      this.validateAuth()
     }
   }
 }

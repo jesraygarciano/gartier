@@ -1,22 +1,14 @@
 <template>
   <sidebar-popup ref="modal">
-    <div class="header-part">
-      <entity-header>
-        <template slot="icon">
-          <span v-html="icon"></span>
-        </template>
-        <template slot="text">
-          <div class="text-ellipsis font-weight-bold">
-            {{title}}
-          </div>
-        </template>
-        <template slot="buttons">
-          <button type="button" style="margin-top: -40px;" v-on:click="close" class="btn btn-light">
-            <i class="fa fa-close" aria-hidden="true"></i>
-          </button>
-        </template>
-      </entity-header>
-    </div>
+    <h6 class="p-15 border-bottom">
+      <span v-html="icon"></span>
+      {{title}}
+    </h6>
+    <template slot="options">
+      <button type="button" v-on:click="close" class="btn btn-light">
+        <i class="fa fa-close" aria-hidden="true"></i>
+      </button>
+    </template>
     <div class="modal-body">
       <table v-if="loaded" class="table table-hover">
         <thead>
@@ -75,19 +67,19 @@ export default {
       switch(status){
         case 0:
         this.title = 'Pending Applications'
-        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-envelope-o fa-2x" style="color:#f39c12;"></i>'
+        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-envelope-o" style="color:#f39c12;"></i>'
         break;
         case 1:
         this.title = 'In-progress Applications'
-        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-exchange fa-2x" style="color:#00c0ef;"></i>'
+        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-exchange" style="color:#00c0ef;"></i>'
         break
         case 2:
         this.title = 'Finished Applications'
-        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-check-circle-o fa-2x" style="color:#00a65a;"></i>'
+        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-check-circle-o" style="color:#00a65a;"></i>'
         break
         case 3:
         this.title = 'Inactive Applications'
-        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-times-circle-o fa-2x" style="color:#DD4A39;"></i>'
+        this.icon = '<i data-v-bc5483a4="" aria-hidden="true" class="fa fa-times-circle-o" style="color:#DD4A39;"></i>'
         break
       }
     },

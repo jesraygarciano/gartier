@@ -62,18 +62,18 @@
         </div>
       </div>
     </form>
-    <vue-photo-editor title="Company Cover" ref="photo-editor" @update="updateLogo"></vue-photo-editor>
+    <profile-picture-modal ref="photo-editor" @update="updateLogo"/>
   </card>
 </template>
 
 <script>
 import Form from 'vform'
-import vuePhotoEditor from 'unick-vue-photo-editor';
+import ProfilePictureModal from '~/components/photo-editors/profilePictureModal'
 export default {
   middleware: 'auth',
   scrollToTop: false,
   components: {
-    vuePhotoEditor
+    ProfilePictureModal
   },
   metaInfo () {
     return { title: 'Create Company' }
@@ -101,7 +101,7 @@ export default {
       this.$refs['company-logo'].src = photo_data;
     },
     showPhotoEditor(){
-      this.$refs['photo-editor'].show(this.form.photo);
+      this.$refs['photo-editor'].prepUpdate(this.form.photo);
     },
   }
 }

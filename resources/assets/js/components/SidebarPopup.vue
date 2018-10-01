@@ -2,6 +2,9 @@
   <div class="side-popup hidden" ref="popup">
     <div v-on:click="hide" class="side-background"></div>
     <div class="popup">
+      <div class="top-right">
+        <slot name="options"/>
+      </div>
       <slot/>
     </div>
   </div>
@@ -34,6 +37,16 @@ export default {
         $this.hide();
       }
     })
+  },
+  beforeDestroy(){
+    this.hide()
   }
 }
 </script>
+<style lang="scss" scoped>
+.top-right{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+</style>

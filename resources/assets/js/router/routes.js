@@ -23,7 +23,7 @@ const CompanyHiringProcessesCreate = () => import('~/pages/hiring-process/edit')
 
 // opening pages
 const OpeningProfile = () => import('~/pages/opening/index').then(m => m.default || m)
-const UserCompanies = () => import('~/pages/user/companies').then(m => m.default || m)
+const UserCompanies = () => import('~/pages/user/companies/index').then(m => m.default || m)
 const OpeningApply = () => import('~/pages/opening/apply/index').then(m => m.default || m)
 const HiringApplications = () => import('~/pages/user/hiringApplications').then(m => m.default || m)
 const CompanyCreate = () => import('~/pages/company/create').then(m => m.default || m)
@@ -49,7 +49,7 @@ export default [
   { path: '/password/reset', name: 'password.request', component: PasswordEmail },
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
 
-  { path: '/home', name: 'home', component: Home },
+  { path: '/home', name: 'home', component: ApplicantDashboard },
 
   // dashboards
   { path: '/dashboard/recruiter', name: 'dashboard.recruiter', component: RecruiterDashboard },

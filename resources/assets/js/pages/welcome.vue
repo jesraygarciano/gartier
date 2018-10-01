@@ -37,6 +37,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'basic',
+  middleware: 'guest',
 
   metaInfo () {
     return { title: this.$t('home') }

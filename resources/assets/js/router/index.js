@@ -4,6 +4,7 @@ import Meta from 'vue-meta'
 import routes from './routes'
 import Router from 'vue-router'
 import { sync } from 'vuex-router-sync'
+import jQuery from 'jquery'
 
 Vue.use(Meta)
 Vue.use(Router)
@@ -185,6 +186,9 @@ function scrollBehavior (to, from, savedPosition) {
   if (component && component.scrollToTop === false) {
     return {}
   }
+  
+  // uelmar's custom code for admin layout
+  jQuery('[data-addScrollTopBehavior]').scrollTop(0)
 
   return { x: 0, y: 0 }
 }

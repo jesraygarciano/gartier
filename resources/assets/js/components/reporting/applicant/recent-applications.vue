@@ -2,11 +2,11 @@
   <div class="simple-card">
     <div class="simple-card-header">
       Recent Applications
-      <router-link :to="{name:'hiringApplication.applications'}" class="pull-right btn btn-primary btn-sm">
+      <router-link :to="{ name: 'hiringApplication.applications' }" class="pull-right btn btn-primary btn-sm">
         See All
       </router-link>
     </div>
-    <div class="simple-card-body">
+    <div class="simple-card-body" v-if="loaded">
       <div class="text-muted p-15" v-if="!applications.length">Nothing to show.</div>
       <application-list :applications="applications"/>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sidebar" ref="sidebar">
+    <div class="sidebar" ref="sidebar" @click="hideUserOption">
       <div class="text-center border-bottom pt-2 pb-2 position-relative">
         <img :src="public_path+'/images/logo_brand.png'">
         <div class="transparent-cover v-small" @click="showSidebar"></div>
@@ -27,11 +27,26 @@
           Companies
         </router-link>
       </div>
+      <div class="p-2 bg-light"><small>User Business</small></div>
+      <div class="list-group list-group-flush">
+        <router-link :to="{ name: 'opening.search' }" class="list-group-item list-group-item-action sidebar-nav" active-class="active">
+          User Openings
+        </router-link>
+        <router-link :to="{ name: 'user.companies' }" class="list-group-item list-group-item-action sidebar-nav" active-class="active">
+          User Companies
+        </router-link>
+        <router-link :to="{ name: 'company.search' }" class="list-group-item list-group-item-action sidebar-nav" active-class="active">
+          Companies You Followed
+        </router-link>
+        <router-link :to="{ name: 'company.search' }" class="list-group-item list-group-item-action sidebar-nav" active-class="active">
+          Openings You Saved
+        </router-link>
+      </div>
     </div>
     <div class="sidebar-backdrop" @click="showSidebar"></div>
-    <div class="main-layout sidebar-scroll-cancelled" ref="main-layout">
-      <navbar @toggle="showSidebar"/>
-      <div class="container mt-4">
+    <div class="main-layout sidebar-scroll-cancelled" data-addScrollTopBehavior ref="main-layout">
+      <navbar @toggle="showSidebar" ref="navigation"/>
+      <div class="container mt-4" @click="hideUserOption">
         <child/>
       </div>
     </div>
@@ -62,8 +77,11 @@ export default {
       }
       // trigger all events that should be triggered when sidebar is showed or hidden
       // e.g application progress line
-      setTimeout(triggerLayoutEvents, 300)
-    }
+      setTimeout(triggerLayoutEvents, 400)
+    },
+    hideUserOption(){
+      this.$refs.navigation.hideUserOption()
+    },
   },
   mounted(){
     if(jQuery(document).width() > 768){
@@ -99,6 +117,7 @@ $transition:300ms ease all;
   left: -$sidebar_width;
   box-shadow:  2px 0px 6px -4px rgba(150,150,150,1);
   transition: $transition;
+  overflow: auto;
   &.visible{
     visibility: visible;
     left: 0px;

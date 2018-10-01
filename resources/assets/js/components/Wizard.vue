@@ -134,6 +134,10 @@ export default {
       jQuery(this).removeClass('is-invalid');
       jQuery(this).closest('.invalid-feedback').remove();
     });
+
+    windowResizeDetector.addEvent(this.renderLines)
+    layout_events.push(this.renderLines)
+    console.log(this)
   }
 }
 </script>

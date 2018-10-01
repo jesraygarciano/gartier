@@ -1,20 +1,23 @@
 <template>
   <div style="padding-bottom: 100px;">
-    <img :src="public_path+'/images/logo_brand.png'" style="position: absolute; z-index: 3; left: 15px; top: 18px;">
-    <div class="top-right links">
-      <template v-if="authenticated">
-        <router-link :to="{ name: 'home' }">
-          {{ $t('home') }}
-        </router-link>
-      </template>
-      <template v-else>
-        <router-link :to="{ name: 'login' }">
-          {{ $t('login') }}
-        </router-link>
-        <router-link :to="{ name: 'register' }">
-          {{ $t('register') }}
-        </router-link>
-      </template>
+    <div class="nav-head p-15">
+      <img :src="public_path+'/images/logo_brand.png'">
+      <div class="links pull-right">
+        <template v-if="authenticated">
+          <router-link :to="{ name: 'home' }">
+            {{ $t('home') }}
+          </router-link>
+        </template>
+        <template v-else>
+          <router-link :to="{ name: 'login' }">
+            {{ $t('login') }}
+          </router-link>
+          |
+          <router-link :to="{ name: 'register' }">
+            {{ $t('register') }}
+          </router-link>
+        </template>
+      </div>
     </div>
     <div  class="basic-layout d-flex align-items-center justify-content-center m-0 bg-white">
       <div class="col-md-5">
@@ -23,7 +26,7 @@
             font-size: 30px;
             vertical-align: middle;
         "></i> 
-            Search your dream Job
+            Find your dream Job
         </div>
         <br>
         <div class="title">
@@ -126,6 +129,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'basic',
+  middleware: 'guest',
 
   metaInfo () {
     return { title: this.$t('home') }
@@ -143,21 +147,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.top-right {
+.nav-head{
   position: absolute;
-  right: 10px;
-  top: 18px;
-  z-index: 2;
-
-  &.links > a {
+  width: 100%;
+  z-index: 1000;
+}
+.links > a {
     color: #636b6f;
-    padding: 0 25px;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .1rem;
     text-decoration: none;
     text-transform: uppercase;
-  }
 }
 
 .title {

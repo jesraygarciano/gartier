@@ -4,6 +4,7 @@ import router from '~/router'
 import i18n from '~/plugins/i18n'
 import App from '~/components/App'
 import jQuery from 'jquery'
+import windowResizeDetector from '~/plugins/windowResizeDetector'
 let moment = require("moment")
 import Echo from "laravel-echo"
 window.layout_events=[]
@@ -23,6 +24,7 @@ window.Echo = new Echo({
 });
 
 global.jQuery = jQuery
+global.windowResizeDetector = windowResizeDetector
 global.moment = moment
 global.Vue = Vue
 let Bootstrap = require('bootstrap');

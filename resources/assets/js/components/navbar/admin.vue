@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white text-right d-block">
+    <nav style="z-index: 1010" class="navbar navbar-expand-md navbar-light bg-white text-right d-block">
       <button type="button" @click="clickToggle" class="btn btn-light pull-left">
         <i class="fa fa-bars" aria-hidden="true"></i>
       </button>
@@ -9,17 +9,14 @@
         <p class="number-icon" v-if="notifications_count > 0"><i class="number">{{notifications_count}}</i></p>
         <i class="fa fa-bell-o" aria-hidden="true"></i>
       </a>
-      <router-link v-if="user" class="d-inline-block nav-link text-dark" :to="{ name: 'user.profile' }">
+      <a v-if="user" href="#" @click="showUserOption" class="d-inline-block nav-link text-dark">
         <img :src="user.photo" class="rounded-circle profile-photo mr-1">
         <span class="hidden-md">{{ user.first_name + " " + user.last_name}}</span>
-      </router-link>
-      <a v-else href="#" class="nav-link">
-        {{ $t('login') }}
       </a>
+      <user-option ref="user-option"/>
     </nav>
     <notification-modal ref="notification-modal"/>
     <notifications group="foo" position="bottom right"/>
-    <sign-in @logged="userLoggedIn" ref="sign-in-modal" v-if="!user || signedIn"/>
   </div>
 </template>
 
@@ -30,14 +27,14 @@ import NotificationModal from '~/components/NotificationModal'
 import axios from 'axios'
 import Vue from 'vue'
 import Notifications from 'vue-notification'
-import SignIn from './components/sign-in'
+import UserOption from './components/user-option'
 
 Vue.use(Notifications)
 export default {
   components: {
     LocaleDropdown,
     NotificationModal,
-    SignIn,
+    UserOption
   },
 
   data: () => ({
@@ -104,6 +101,12 @@ export default {
     },
     clickToggle(){
       this.$emit('toggle');
+    },
+    showUserOption(){
+      this.$refs['user-option'].show()
+    },
+    hideUserOption(){
+      this.$refs['user-option'].hide()
     }
   },
   created: function(){
