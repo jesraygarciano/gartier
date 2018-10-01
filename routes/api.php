@@ -76,10 +76,10 @@ Route::group(['middleware' => 'auth:api'], function () {
             Route::get('hiring/applications2', 'CompanyController@fetchHiringApplications2');
             Route::get('collaborators', 'CompanyController@fetchCollaborators');
             Route::get('isBookMarked', 'CompanyController@fetchIsBookMarked');
-            
             Route::group(['prefix' => 'applicants'], function(){
                 Route::get('lazy_load', 'CompanyController@lazyFetchHiringApplication');
             });
+            Route::get('managed/companies', 'UserController@fetch_companies');
         });
 
         // add
