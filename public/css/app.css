@@ -15028,6 +15028,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   top: 50%;
   -webkit-transform: translateX(50%) translateY(-50%);
           transform: translateX(50%) translateY(-50%);
+  visibility: hidden;
 }
 
 .h-d-f-r .d-bttns .bttn {
@@ -15038,6 +15039,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   opacity: 1;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  visibility: visible;
 }
 
 @-webkit-keyframes spinAround {
@@ -16082,7 +16084,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   height: 100%;
   top: 0px;
   left: 0px;
-  z-index: 1000;
+  z-index: 1040;
   -webkit-transition: visibility 0s;
   transition: visibility 0s;
 }
@@ -16109,6 +16111,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
           transform: initial;
   -webkit-transition: 400ms ease all;
   transition: 400ms ease all;
+  overflow: auto;
 }
 
 @media (max-width: 768px) {
