@@ -39,7 +39,8 @@ class OpeningResource extends JsonResource
             "created_at" => $this->created_at,
             "user_application" => $application,
             "authorize_edit" => $authorizeEdit,
-            "posted_at" => translateDateTime($this->created_at)
+            "posted_at" => translateDateTime($this->created_at),
+            "hiring_step_group_id" => $this->hiring_step_group_id
         ];
     }
 
